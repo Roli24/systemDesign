@@ -1,0 +1,106 @@
+FaceBook Capacity Estimation
+
+1. Character -> 2 bytes
+2. Long- > 8 bytes
+3. Average Image size -> 300 KB
+
+
+1 Million -> 6 zeros
+1 Billion  -> 9 zeroes
+
+
+1. No of servers
+2. RAM
+3. Storage Capacity
+
+Which are important resources for system design
+
+TradeOff [CAP theorem]
+
+
+X million User * Y MB -> Storage calculation
+X * 10^6 * Y * 10 ^6
+XY TB
+
+
+5 Million user * 2 KB => 10^6 * 10 ^3
+	10^GB
+
+
+Estimation of FaceBook : 
+
+
+Always first Traffic Estimation:
+
+Total User : 1 Billion -> 10 ^9
+ DAU :  25 % of total Users
+    250 Million User
+
+Any system have read operation/write
+
+Traffic Estimation
+
+5 read
+2 write
+
+Almost 7 Query
+
+(250 Million * 7query)/60 *60 *24~86400 ~10000
+
+250 * 10^6 *7/10^5 
+2500*7 = 18 K query/second
+
+
+Storage Assumption:
+
+1 Every user is doing 2 post [250 ]
+10% of user is uploading images
+
+1 post -> 250 character
+250 * 2 -> 500 Bytes
+
+
+2 post -> 500* 2 => 1000 Bytes => 1KB
+
+250 * 10^6 * 10^3 => 250 GB/day [Text]
+250 * 300 KB (Image size) => 7500 GB = 7 *10^9 => 8TB [Image for Post]
+
+5 years ~ 2000 days
+2000* 250 GB [POST] - > 500 TB
+2000 * 8 TB [Image] -> 16 PB
+
+RAM Estimation: [Memory Estimation]
+
+For each user last 5 posts cache:
+2500 bytes -> 3000 bytes -> 3 KB
+250 Million * 3 KB ~
+
+750 GB
+ 1 machine can have 75 GB
+
+If one machine 75 GB of data in memory
+10 machines for caching
+
+
+Latency: 
+
+500 MS 95%
+18 K/ second -> 
+1 machine/ server -> 50 threads
+1 second -> 500 ms 
+1 server -> 50 threads -> 100 requests/second
+180 server -> 18k requests/second
+
+
+CAP Theorem:
+
+Consistency
+Availability
+Partition Tolerance
+
+At a time only u can achieve two
+
+CA, CP or AP either one of u can have
+It should be highly available
+
+AP I will go, consistency can be dropped
